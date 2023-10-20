@@ -218,6 +218,8 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+gaps outer 10
+
 # Autostart applications
 ## Day/night gamma adjustments
 # exec gammastep -l -19.85944:-43.94346  # may not work for some drivers
