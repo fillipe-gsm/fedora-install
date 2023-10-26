@@ -1,0 +1,4 @@
+# Load xontribs
+xontrib load vox whole_word_jumping fish_completer
+
+$EDITOR = "/usr/bin/nvim"
