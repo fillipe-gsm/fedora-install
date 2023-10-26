@@ -1,7 +1,16 @@
 # Fedora new installation
 
 A companion of files, scripts and notes to have a proper Fedora installation from scratch.
-This
+After cloning this repo, run
+
+```bash
+bash full_setup.sh
+```
+
+and let everything run by itself.
+
+The following sections are just brief explanations of the config files and annotations given my research when creating this script.
+
 
 # Post-installation steps
 
@@ -89,5 +98,3 @@ sudo dnf install <package-name>
 ```bash
 sudo dnf search <keyword>
 ```
-
-## Change keyboard layout

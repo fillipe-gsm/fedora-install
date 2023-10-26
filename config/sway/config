@@ -218,7 +218,7 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-gaps outer 10
+gaps outer 5
 
 # Autostart applications
 ## Day/night gamma adjustments
