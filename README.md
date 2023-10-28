@@ -31,6 +31,10 @@ sudo dnf install neovim gcc fd-find nodejs cargo python3-pip
 pipx install "xonsh[full]" & pipx install "poetry"
 ```
 
+## Additional multimedia support
+
+Fedora ships with free plugins for sound, which seem to work in mainstream sites such as YouTube. But for added support one needs to enable the non-free repo. Take a look at [this page](https://rpmfusion.org/Howto/Multimedia) for more information.
+
 ## Software configuration
 
 ### Sway
@@ -77,6 +81,10 @@ The following important configurations are:
 - `shell <shell>`: Run the following shell when opening. This may be safer than using `chsh` since it can accept non-POSIX compliant shells, like `xonsh` and `nu`.
 
 For themes, check the website. The current config folder has a selected light theme that looks nice in the eyes.
+
+### Latex
+
+See [this page](https://docs.fedoraproject.org/en-US/neurofedora/latex/) for details with running LaTeX in Fedora. Here I am trying to setup with the *medium* set of packages.
 
 
 # Commands
