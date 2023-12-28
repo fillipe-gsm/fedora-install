@@ -44,8 +44,8 @@ output * bg /usr/share/backgrounds/default.png fill
 # Example configuration:
 #
 exec swayidle -w \
-    timeout 600 'swaylock -f -c 000000' \
-    timeout 300 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+    timeout 1000 'swaylock -f -c 000000' \
+    timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
     before-sleep 'swaylock -f -c 000000'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
@@ -226,7 +226,7 @@ gaps outer 5
 exec wlsunset -l -19.85944:-43.94346  # seem to work in virtual machine
 
 ## Pcloud
-exec ~/Downloads/software/pcloud
+exec ~/Downloads/software/filen_x86_64.AppImage
 
 ## Flameshot
 exec flameshot
