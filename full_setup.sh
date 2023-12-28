@@ -23,13 +23,17 @@ echo "- Latex (installing medium set of packages)..."
 sudo dnf -y install texlive-scheme-medium
 echo "... done."
 
+echo "- Programming..."
+sudo dnf -y install httpie docker
+echo "... done."
+
 echo "- Pipx packages..."
 pipx install "xonsh[full]" & pipx install "poetry"
 echo "... done."
 
 echo "- Xonsh xontribs..."
 # Have to call momentarily from `xonsh`
-xonsh -lic "xpip install xontrib-vox & xpip install xontrib-whole-word-jumping & xpip install xontrib-fish-completer"
+xonsh -lic "xpip install xontrib-vox && xpip install xontrib-whole-word-jumping && xpip install xontrib-fish-completer"
 echo "... done."
 
 echo "=========================================================================="
@@ -65,5 +69,18 @@ sudo dnf -y swap ffmpeg-free ffmpeg --allowerasing
 # Install additional codecs
 sudo dnf -y groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
 sudo dnf -y groupupdate sound-and-video
+
+echo "... done."
+
+echo "=========================================================================="
+echo "Configuring docker..."
+
+sudo systemctl enable docker  # enable it on startup
+sudo systemctl start docker  # start it now
+
+# Add current user to "docker" group so we don't need `sudo` to use it
+sudo groupadd docker
+sudo gpasswd -a ${USER} docker
+# newgrp docker  # to log-in if required
 
 echo "... done."
