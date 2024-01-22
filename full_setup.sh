@@ -25,6 +25,8 @@ echo "... done."
 
 echo "- Programming..."
 sudo dnf -y install httpie docker
+sudo dnf copr enable atim/lazygit -y
+sudo dnf -y install lazygit
 echo "... done."
 
 echo "- Pipx packages..."
