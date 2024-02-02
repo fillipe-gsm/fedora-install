@@ -12,7 +12,7 @@ sudo dnf -y install pipx git
 echo "... done."
 
 echo "- Utilities..."
-sudo dnf -y install fish kitty ranger htop wlsunset flameshot pass zathura zathura-pdf-poppler tuxguitar
+sudo dnf -y install fish kitty ranger htop wlsunset flameshot pass zathura zathura-pdf-poppler tuxguitar pandoc
 echo "... done."
 
 echo "- Neovim..."
@@ -24,7 +24,7 @@ sudo dnf -y install texlive-scheme-medium
 echo "... done."
 
 echo "- Programming..."
-sudo dnf -y install httpie docker
+sudo dnf -y install httpie docker docker-compose
 sudo dnf copr enable atim/lazygit -y
 sudo dnf -y install lazygit
 echo "... done."
