@@ -12,7 +12,7 @@ sudo dnf -y install pipx git
 echo "... done."
 
 echo "- Utilities..."
-sudo dnf -y install fish kitty ranger htop wlsunset flameshot pass zathura zathura-pdf-poppler tuxguitar pandoc
+sudo dnf -y install fish kitty ranger htop wlsunset flameshot pass zathura zathura-pdf-poppler tuxguitar pandoc thunderbird-wayland tmux
 echo "... done."
 
 echo "- Neovim..."
