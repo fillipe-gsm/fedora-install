@@ -39,8 +39,11 @@ xonsh -lic "xpip install xontrib-vox && xpip install xontrib-whole-word-jumping 
 echo "... done."
 
 echo "=========================================================================="
-echo "Copying .config files"
-cp --archive --verbose --recursive --update ./config/. ~/.config/
+echo "Copying .config files (with symbolic links)"
+ln -sf $PWD/config/sway/config ~/.config/sway/config
+ln -sf $PWD/config/waybar/config ~/.config/waybar/config
+ln -sf $PWD/config/kitty ~/.config/kitty
+# cp --archive --verbose --recursive --update ./config/. ~/.config/
 
 echo "Copying .xonshrc configuration"
 cp --verbose --update ./xonsh/.xonshrc ~/
