@@ -24,7 +24,7 @@ sudo dnf -y install texlive-scheme-medium
 echo "... done."
 
 echo "- Programming..."
-sudo dnf -y install httpie docker docker-compose
+sudo dnf -y install httpie docker docker-compose R-devel
 sudo dnf copr enable atim/lazygit -y
 sudo dnf -y install lazygit
 echo "... done."
