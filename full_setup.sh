@@ -78,6 +78,13 @@ sudo dnf -y groupupdate sound-and-video
 echo "... done."
 
 echo "=========================================================================="
+echo "Installing Mullvad VPN"
+sudo dnf config-manager --add-repo https://repository.mullvad.net/rpm/stable/mullvad.repo
+sudo dnf install -y mullvad-vpn
+
+echo "... done."
+
+echo "=========================================================================="
 echo "Configuring docker..."
 
 sudo systemctl enable docker  # enable it on startup
