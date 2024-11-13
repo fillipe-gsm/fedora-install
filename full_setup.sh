@@ -12,7 +12,9 @@ sudo dnf -y install pipx git
 echo "... done."
 
 echo "- Utilities..."
-sudo dnf -y install fish kitty ranger htop wlsunset flameshot pass zathura zathura-pdf-poppler tuxguitar pandoc thunderbird-wayland tmux libreoffice
+dnf -y install fish kitty htop wlsunset flameshot pass zathura zathura-pdf-poppler tuxguitar pandoc thunderbird-wayland tmux libreoffice ipe
+echo "... done."
+
 echo "- Virtualization..."
 dnf -y install libvirt virt-manager qemu
 echo "... done."
@@ -32,7 +34,8 @@ sudo dnf -y install lazygit
 echo "... done."
 
 echo "- Pipx packages..."
-pipx install "xonsh[full]" & pipx install "poetry"
+sudo -u $USER pipx install "poetry" & sudo -u $USER pipx install ranger-fm
+# pipx install "xonsh[full]" & pipx install "poetry" & pipx install ranger-fm
 echo "... done."
 
 echo "- Xonsh xontribs..."
