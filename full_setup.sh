@@ -38,10 +38,11 @@ sudo -u $USER pipx install "poetry" & sudo -u $USER pipx install ranger-fm
 # pipx install "xonsh[full]" & pipx install "poetry" & pipx install ranger-fm
 echo "... done."
 
-echo "- Xonsh xontribs..."
-# Have to call momentarily from `xonsh`
-xonsh -lic "xpip install xontrib-vox && xpip install xontrib-whole-word-jumping && xpip install xontrib-fish-completer"
-echo "... done."
+# Thinking about ignoring xonsh
+# echo "- Xonsh xontribs..."
+# # Have to call momentarily from `xonsh`
+# xonsh -lic "xpip install xontrib-vox && xpip install xontrib-whole-word-jumping && xpip install xontrib-fish-completer"
+# echo "... done."
 
 echo "=========================================================================="
 echo "Copying .config files (with symbolic links)"
@@ -50,8 +51,8 @@ ln -sf $PWD/config/waybar/config ~/.config/waybar/config
 ln -sf $PWD/config/kitty ~/.config/kitty
 # cp --archive --verbose --recursive --update ./config/. ~/.config/
 
-echo "Copying .xonshrc configuration"
-cp --verbose --update ./xonsh/.xonshrc ~/
+# echo "Copying .xonshrc configuration"
+# cp --verbose --update ./xonsh/.xonshrc ~/
 
 echo "... done."
 
