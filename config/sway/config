@@ -68,8 +68,8 @@ exec swayidle -w \
 
 # Keyboard layouts. It is possible to toggle between them with $mod+space
 input type:keyboard {
-    xkb_layout "us,br"
-    xkb_variant "intl,"
+    xkb_layout "br,us"
+    xkb_variant ",intl"
     xkb_options "grp:win_space_toggle"
     repeat_delay 250
     repeat_rate 25

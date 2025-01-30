@@ -14,7 +14,7 @@ dnf -y install pipx git
 echo "... done."
 
 echo "- Utilities..."
-dnf -y install fish kitty htop wlsunset flameshot pass zathura zathura-pdf-poppler tuxguitar pandoc thunderbird-wayland tmux libreoffice ipe
+dnf -y install fish kitty htop wlsunset flameshot zathura zathura-pdf-poppler tuxguitar pandoc thunderbird libreoffice ipe hledger
 echo "... done."
 
 echo "- Virtualization..."
@@ -36,7 +36,8 @@ dnf -y install lazygit
 echo "... done."
 
 echo "- Pipx packages..."
-sudo -u $USER pipx install "poetry" & sudo -u $USER pipx install ranger-fm
+sudo -u $USER pipx install "poetry" 
+sudo -u $USER pipx install ranger-fm
 # pipx install "xonsh[full]" & pipx install "poetry" & pipx install ranger-fm
 echo "... done."
 
@@ -48,9 +49,11 @@ echo "... done."
 
 echo "=========================================================================="
 echo "Copying .config files (with symbolic links)"
-sudo -u $USER ln -sf $PWD/config/sway/config ~/.config/sway/config
-sudo -u $USER ln -sf $PWD/config/waybar/config ~/.config/waybar/config
-sudo -u $USER ln -sf $PWD/config/kitty ~/.config/kitty
+sudo -u $USER mkdir -p /home/$USER/.config/sway
+sudo -u $USER mkdir -p /home/$USER/.config/waybar
+sudo -u $USER ln -sf $PWD/config/sway/config /home/$USER/.config/sway/config
+sudo -u $USER ln -sf $PWD/config/waybar/config /home/$USER/.config/waybar/config
+sudo -u $USER ln -sf $PWD/config/kitty /home/$USER/.config/kitty
 
 # echo "Copying .xonshrc configuration"
 # cp --verbose --update ./xonsh/.xonshrc ~/
@@ -86,7 +89,8 @@ echo "... done."
 
 echo "=========================================================================="
 echo "Installing Mullvad VPN"
-dnf config-manager --add-repo https://repository.mullvad.net/rpm/stable/mullvad.repo
+#dnf config-manager --add-repo https://repository.mullvad.net/rpm/stable/mullvad.repo  # Fedora 40 
+dnf config-manager addrepo --from-repofile=https://repository.mullvad.net/rpm/stable/mullvad.repo  # Fedora 41
 dnf install -y mullvad-vpn
 
 echo "... done."
