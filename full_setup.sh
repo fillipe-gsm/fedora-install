@@ -107,3 +107,9 @@ gpasswd -a ${USER} docker
 # newgrp docker  # to log-in if required
 
 echo "... done."
+
+echo "=========================================================================="
+echo "Configuring git"
+
+git config --global user.email "fillipe.gsm@tutanota.com"
+git config --global user.name "Fillipe Goulart"
