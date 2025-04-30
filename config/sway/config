@@ -226,8 +226,8 @@ gaps outer 5
 # exec gammastep -l -19.85944:-43.94346  # may not work for some drivers
 exec wlsunset -l -19.85944:-43.94346  # seem to work in virtual machine
 
-## Pcloud
-exec ~/Downloads/software/filen_x86_64.AppImage
+## Filen
+exec @filendesktop
 
 ## Flameshot
 exec flameshot
