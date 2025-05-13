@@ -89,6 +89,7 @@ echo "... done."
 
 echo "=========================================================================="
 echo "Installing Mullvad VPN"
+#dnf config-manager --add-repo https://repository.mullvad.net/rpm/stable/mullvad.repo  # Fedora 40
 dnf config-manager addrepo --from-repofile=https://repository.mullvad.net/rpm/stable/mullvad.repo  # Fedora 41
 dnf install -y mullvad-vpn
 
@@ -110,5 +111,5 @@ echo "... done."
 echo "=========================================================================="
 echo "Configuring git"
 
-git config --global user.email "fillipe.gsm@tutanota.com"
-git config --global user.name "Fillipe Goulart"
+sudo -u $USER git config --global user.email "fillipe.gsm@tutanota.com"
+sudo -u $USER git config --global user.name "Fillipe Goulart"
