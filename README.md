@@ -28,7 +28,7 @@ sudo dnf install neovim gcc fd-find nodejs cargo python3-pip
 ### pipx packages
 
 ```bash
-pipx install "xonsh[full]" & pipx install "poetry"
+pipx install "poetry"
 ```
 
 ## Additional multimedia support
@@ -61,16 +61,6 @@ cp /etc/xdg/waybar/config ~/.config/waybar/config
 ```
 
 and add `position: botttom`.
-
-### Xonsh shell
-
-Install the required xontribs
-
-```bash
-xpip install xontrib-vox & xpip install xontrib-whole-word-jumping & xpip install xontrib-fish-completer
-```
-
-Then copy the `.xonshrc` file to the `$HOME` directory.
 
 ### Kitty Terminal
 

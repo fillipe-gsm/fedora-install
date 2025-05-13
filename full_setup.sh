@@ -36,7 +36,7 @@ dnf -y install lazygit
 echo "... done."
 
 echo "- Pipx packages..."
-sudo -u $USER pipx install "poetry" 
+sudo -u $USER pipx install "poetry"
 sudo -u $USER pipx install ranger-fm
 # pipx install "xonsh[full]" & pipx install "poetry" & pipx install ranger-fm
 echo "... done."
