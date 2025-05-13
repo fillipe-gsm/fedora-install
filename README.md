@@ -77,6 +77,21 @@ For themes, check the website. The current config folder has a selected light th
 See [this page](https://docs.fedoraproject.org/en-US/neurofedora/latex/) for details with running LaTeX in Fedora. Here I am trying to setup with the *medium* set of packages.
 
 
+### IRPF
+
+Esta seção está em português por ser específica do Brasil.
+
+Para usar o programa do IRPF sempre precisamos primeiro de usar uma versão compatível do Java. O script de instalação atual já permite que eu possa alterá-la se necessário, então isto está coberto.
+
+O segundo problema é na hora de enviar, em que recebo erros de certificado. Veja [esta página para detalhes](https://www.vivaolinux.com.br/dica/Problema-na-Transmissao-da-Declaracao-de-Imposto-de-Renda-PF-pelo-Aplicativo-IRPF-Resolvido).
+
+No fim das contas, para funcionar no Fedora, eu fiz o seguinte:
+
+- Abra o arquivo `/etc/crypto-policies/back-ends/java.config` com permissão de root;
+- Comente *todas* as linhas. O site recomenda apenas uma, mas para funcionar eu precisei desabilitar tudo.
+
+Isso pode parecer inseguro, mas mais que isso é ficar em débito com a receita federel.
+
 # Commands
 
 ## Update system
