@@ -89,7 +89,6 @@ echo "... done."
 
 echo "=========================================================================="
 echo "Installing Mullvad VPN"
-#dnf config-manager --add-repo https://repository.mullvad.net/rpm/stable/mullvad.repo  # Fedora 40 
 dnf config-manager addrepo --from-repofile=https://repository.mullvad.net/rpm/stable/mullvad.repo  # Fedora 41
 dnf install -y mullvad-vpn
 
