@@ -38,14 +38,7 @@ echo "... done."
 echo "- Pipx packages..."
 sudo -u $USER pipx install "poetry"
 sudo -u $USER pipx install ranger-fm
-# pipx install "xonsh[full]" & pipx install "poetry" & pipx install ranger-fm
 echo "... done."
-
-# Thinking about ignoring xonsh
-# echo "- Xonsh xontribs..."
-# # Have to call momentarily from `xonsh`
-# xonsh -lic "xpip install xontrib-vox && xpip install xontrib-whole-word-jumping && xpip install xontrib-fish-completer"
-# echo "... done."
 
 echo "=========================================================================="
 echo "Copying .config files (with symbolic links)"
@@ -54,9 +47,6 @@ sudo -u $USER mkdir -p /home/$USER/.config/waybar
 sudo -u $USER ln -sf $PWD/config/sway/config /home/$USER/.config/sway/config
 sudo -u $USER ln -sf $PWD/config/waybar/config /home/$USER/.config/waybar/config
 sudo -u $USER ln -sf $PWD/config/kitty /home/$USER/.config/kitty
-
-# echo "Copying .xonshrc configuration"
-# cp --verbose --update ./xonsh/.xonshrc ~/
 
 echo "... done."
 

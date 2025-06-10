@@ -4,6 +4,7 @@ A companion of files, scripts and notes to have a proper Fedora installation fro
 After cloning this repo, run
 
 ```bash
+su
 bash full_setup.sh
 ```
 
@@ -13,24 +14,6 @@ The following sections are just brief explanations of the config files and annot
 
 
 # Post-installation steps
-
-## Installing packages
-### System Packages
-
-```bash
-sudo dnf install pipx git
-# Utilities
-sudo dnf install fish kitty ranger htop wlsunset flameshot pass zathura zathura-pdf-poppler
-# Neovim specific packages
-sudo dnf install neovim gcc fd-find nodejs cargo python3-pip
-```
-
-### pipx packages
-
-```bash
-pipx install "poetry"
-```
-
 ## Additional multimedia support
 
 Fedora ships with free plugins for sound, which seem to work in mainstream sites such as YouTube. But for added support one needs to enable the non-free repo. Take a look at [this page](https://rpmfusion.org/Howto/Multimedia) for more information.
@@ -76,7 +59,6 @@ For themes, check the website. The current config folder has a selected light th
 
 See [this page](https://docs.fedoraproject.org/en-US/neurofedora/latex/) for details with running LaTeX in Fedora. Here I am trying to setup with the *medium* set of packages.
 
-
 ### IRPF
 
 Esta seção está em português por ser específica do Brasil.
@@ -92,7 +74,7 @@ No fim das contas, para funcionar no Fedora, eu fiz o seguinte:
 
 Isso pode parecer inseguro, mas mais que isso é ficar em débito com a receita federel.
 
-# Commands
+# Useful Commands
 
 ## Update system
 
