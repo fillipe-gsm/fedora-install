@@ -56,10 +56,10 @@ echo "Preparing for neovim..."
 nvim_path="$HOME/.config/nvim"
 
 if [ -d "$nvim_path" ]; then
-	echo "...neovim config already exists. Skipping."
+    echo "...neovim config already exists. Skipping."
 else
-	sudo -u $USER git clone "https://github.com/fillipe-gsm/kickstart.nvim.git" "$nvim_path"
-	echo "...open neovim and see everything being installed."
+    sudo -u $USER git clone "https://github.com/fillipe-gsm/kickstart.nvim.git" "$nvim_path"
+    echo "...open neovim and see everything being installed."
 fi
 
 echo "=========================================================================="
