@@ -43,6 +43,7 @@ echo "... done."
 echo "=========================================================================="
 echo "Copying .config files (with symbolic links)"
 sudo -u $USER mkdir -p /home/$USER/.config/sway
+sudo -u $USER cp $PWD/config/sway/wallpapers /home/$USER/.config/sway/wallpapers
 sudo -u $USER mkdir -p /home/$USER/.config/waybar
 sudo -u $USER ln -sf $PWD/config/sway/config /home/$USER/.config/sway/config
 sudo -u $USER ln -sf $PWD/config/waybar/config /home/$USER/.config/waybar/config
