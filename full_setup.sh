@@ -38,6 +38,8 @@ echo "... done."
 echo "- Pipx packages..."
 sudo -u $USER pipx install "poetry"
 sudo -u $USER pipx install ranger-fm
+sudo -u $USER pipx install uv
+sudo -u $USER pipx install ruff
 echo "... done."
 
 echo "=========================================================================="
