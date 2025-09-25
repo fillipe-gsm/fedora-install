@@ -28,29 +28,31 @@ dnf -y install neovim gcc fd-find nodejs cargo python3-pip
 echo "... done."
 
 echo "- Latex (installing medium set of packages)..."
-dnf -y install texlive-scheme-medium
+dnf -y install texlive-scheme-medium texlive-powerdot texlive-luapstricks
 echo "... done."
 
 echo "- Programming..."
-dnf -y install httpie docker docker-compose R-devel
+dnf -y install httpie docker docker-compose R-devel python3-devel
 dnf copr enable atim/lazygit -y
 dnf -y install lazygit
 echo "... done."
 
 echo "- Pipx packages..."
-sudo -u $USER pipx install "poetry"
-sudo -u $USER pipx install ranger-fm
-sudo -u $USER pipx install pylint
+# sudo -u $USER pipx install "poetry"
+sudo -u "$USER" pipx install ranger-fm
+sudo -u "$USER" pipx install uv
+sudo -u "$USER" pipx install ruff # althought I can install it in my nvim with ruff as well
+# sudo -u $USER pipx install pylint
 echo "... done."
 
 echo "=========================================================================="
 echo "Copying .config files (with symbolic links)"
-sudo -u $USER mkdir -p /home/$USER/.config/sway
-sudo -u $USER cp -r $PWD/config/sway/wallpapers /home/$USER/.config/sway/wallpapers
-sudo -u $USER mkdir -p /home/$USER/.config/waybar
-sudo -u $USER ln -sf $PWD/config/sway/config /home/$USER/.config/sway/config
-sudo -u $USER ln -sf $PWD/config/waybar/config /home/$USER/.config/waybar/config
-sudo -u $USER ln -sf $PWD/config/kitty /home/$USER/.config/kitty
+sudo -u "$USER" mkdir -p /home/$USER/.config/sway
+sudo -u "$USER" cp -r $PWD/config/sway/wallpapers /home/$USER/.config/sway/wallpapers
+sudo -u "$USER" mkdir -p /home/$USER/.config/waybar
+sudo -u "$USER" ln -sf $PWD/config/sway/config /home/$USER/.config/sway/config
+sudo -u "$USER" ln -sf $PWD/config/waybar/config /home/$USER/.config/waybar/config
+sudo -u "$USER" ln -sf $PWD/config/kitty /home/$USER/.config/kitty
 
 echo "... done."
 
@@ -86,7 +88,7 @@ echo "... done."
 echo "=========================================================================="
 echo "Installing Mullvad VPN"
 #dnf config-manager --add-repo https://repository.mullvad.net/rpm/stable/mullvad.repo  # Fedora 40
-dnf config-manager addrepo --overwrite --from-repofile=https://repository.mullvad.net/rpm/stable/mullvad.repo  # Fedora 41 or later
+dnf config-manager addrepo --overwrite --from-repofile=https://repository.mullvad.net/rpm/stable/mullvad.repo # Fedora 41 or later
 dnf install -y mullvad-vpn
 
 echo "... done."
@@ -94,7 +96,7 @@ echo "... done."
 echo "=========================================================================="
 echo "Configuring docker..."
 
-systemctl enable docker  # enable it on startup
+systemctl enable docker # enable it on startup
 systemctl start docker  # start it now
 
 # Add current user to "docker" group so we don't need `sudo` to use it
@@ -109,3 +111,12 @@ echo "Configuring git"
 
 sudo -u $USER git config --global user.email "fillipe.gsm@tutanota.com"
 sudo -u $USER git config --global user.name "Fillipe Goulart"
+
+echo "... done."
+
+echo "=========================================================================="
+echo "Installing yazi file manager"
+dnf copr enable lihaohong/yazi
+dnf install yazi
+
+echo "... done."
