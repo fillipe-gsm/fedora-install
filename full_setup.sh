@@ -64,7 +64,9 @@ nvim_path="/home/$USER/.config/nvim"
 if [ -d "$nvim_path" ]; then
     echo "...neovim config already exists. Skipping."
 else
-    sudo -u $USER git clone "https://github.com/fillipe-gsm/kickstart.nvim.git" "$nvim_path"
+    # Make sure to have SSH keys set up for git access
+    sudo -u "$USER" git clone "git@github.com:fillipe-gsm/fedora-install.git" "$nvim_path"
+    # sudo -u $USER git clone "https://github.com/fillipe-gsm/kickstart.nvim.git" "$nvim_path"
     echo "...open neovim and see everything being installed."
 fi
 
