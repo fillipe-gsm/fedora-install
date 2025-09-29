@@ -13,8 +13,12 @@ echo "- Package managers..."
 dnf -y install pipx git
 echo "... done."
 
+echo "- Browsers..."
+dnf -y install qutebrowser
+echo "... done."
+
 echo "- Utilities..."
-dnf -y install fish kitty htop wlsunset flameshot zathura zathura-pdf-poppler tuxguitar pandoc thunderbird libreoffice ipe hledger
+dnf -y install fish kitty htop wlsunset flameshot zathura zathura-pdf-poppler tuxguitar pandoc thunderbird libreoffice ipe hledger swappy
 echo "... done."
 
 echo "- Virtualization..."
