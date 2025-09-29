@@ -220,6 +220,9 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+# Screenshot replacing flameshot
+bindsym $mod+p exec grim -g "$(slurp)" - | swappy -f -
+
 gaps outer 5
 
 # Autostart applications
@@ -230,8 +233,8 @@ exec wlsunset -l -19.85944:-43.94346  # seem to work in virtual machine
 ## Filen
 exec @filendesktop
 
-## Flameshot
-exec flameshot
+# ## Flameshot
+# exec flameshot
 # Include configs from 3 locations:
 #  - /usr/share/sway/config.d
 #  - /etc/sway/config.d
