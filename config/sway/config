@@ -233,6 +233,9 @@ exec wlsunset -l -19.85944:-43.94346  # seem to work in virtual machine
 # ## Filen
 # exec @filendesktop
 
+## Mullvad
+exec mullvad
+
 # ## Flameshot
 # exec flameshot
 # Include configs from 3 locations:
