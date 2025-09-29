@@ -57,20 +57,6 @@ sudo -u "$USER" ln -sf $PWD/config/kitty /home/$USER/.config/kitty
 echo "... done."
 
 echo "=========================================================================="
-echo "Preparing for neovim..."
-
-nvim_path="/home/$USER/.config/nvim"
-
-if [ -d "$nvim_path" ]; then
-    echo "...neovim config already exists. Skipping."
-else
-    # Make sure to have SSH keys set up for git access
-    sudo -u "$USER" git clone "git@github.com:fillipe-gsm/fedora-install.git" "$nvim_path"
-    # sudo -u $USER git clone "https://github.com/fillipe-gsm/kickstart.nvim.git" "$nvim_path"
-    echo "...open neovim and see everything being installed."
-fi
-
-echo "=========================================================================="
 echo "Adding multimedia support via RPM Fusion..."
 # Enabling the non-free repo
 dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
