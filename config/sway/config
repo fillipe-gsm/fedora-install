@@ -224,6 +224,9 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+# Take a screenshot and edit it with `swappy`, replacing flameshot
+bindsym $mod+p exec grim -g "$(slurp)" - | swappy -f -
+
 gaps outer 5
 
 # Autostart applications
@@ -231,11 +234,9 @@ gaps outer 5
 # exec gammastep -l -19.85944:-43.94346  # may not work for some drivers
 exec wlsunset -l -19.85944:-43.94346  # seem to work in virtual machine
 
-## Filen
-exec @filendesktop
+## Flameshot (screenshot will be taken with Print screen)
+# exec flameshot
 
-## Flameshot
-exec flameshot
 # Include configs from 3 locations:
 #  - /usr/share/sway/config.d
 #  - /etc/sway/config.d

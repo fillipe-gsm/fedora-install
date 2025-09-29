@@ -16,7 +16,7 @@ echo "... done."
 
 echo "- Utilities..."
 # tuxguitar is gone from Fedora 42 and I found no alternative solution
-dnf -y install fish kitty htop wlsunset flameshot zathura zathura-pdf-poppler pandoc thunderbird libreoffice ipe hledger keepassxc
+dnf -y install fish kitty htop wlsunset flameshot zathura zathura-pdf-poppler pandoc thunderbird libreoffice ipe hledger keepassxc swappy
 echo "... done."
 
 echo "- Virtualization..."
