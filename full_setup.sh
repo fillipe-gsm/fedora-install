@@ -32,7 +32,7 @@ dnf -y install texlive-scheme-medium texlive-powerdot texlive-luapstricks
 echo "... done."
 
 echo "- Programming..."
-dnf -y install httpie docker docker-compose R-devel python3-devel
+dnf -y install httpie docker docker-compose R-devel python3-devel sqlite3 libsqlite3x-devel
 dnf copr enable atim/lazygit -y
 dnf -y install lazygit
 echo "... done."
