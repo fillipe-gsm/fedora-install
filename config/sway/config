@@ -62,7 +62,9 @@ exec swayidle -w \
 # Example configuration:
 #
 # input "2:14:SynPS/2_Synaptics_TouchPad" {
-input "1739:52545:SYNA7DB5:01_06CB:CD41_Touchpad" {
+# input "1739:52545:SYNA7DB5:01_06CB:CD41_Touchpad" {
+# Name of work computer touchpad
+input "1739:52837:VEN_06CB:00_06CB:CE65_Touchpad" {
     dwt enabled
     tap enabled
     natural_scroll disabled
