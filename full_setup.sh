@@ -49,6 +49,11 @@ sudo -u "$USER" pipx install ruff # althought I can install it in my nvim with r
 # sudo -u $USER pipx install pylint
 echo "... done."
 
+echo "- Gem (ruby) packages..."
+sudo -u "$USER" gem install asccidoctor
+sudo -u "$USER" gem install asccidoctor-pdf
+echo "... done."
+
 echo "=========================================================================="
 echo "Copying .config files (with symbolic links)"
 sudo -u "$USER" mkdir -p /home/$USER/.config/sway
