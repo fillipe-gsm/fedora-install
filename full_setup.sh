@@ -52,6 +52,14 @@ sudo -u "$USER" gem install asccidoctor
 sudo -u "$USER" gem install asccidoctor-pdf
 echo "... done."
 
+echo "- Extra desktop and window managers..."
+# MangoWM
+dnf install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
+dnf install mangowm
+# Noctalia desktop shell
+dnf install noctalia-shell
+echo "... done."
+
 echo "=========================================================================="
 echo "Copying .config files (with symbolic links)"
 sudo -u "$USER" mkdir -p /home/$USER/.config/sway
@@ -60,6 +68,8 @@ sudo -u "$USER" mkdir -p /home/$USER/.config/waybar
 sudo -u "$USER" ln -sf $PWD/config/sway/config /home/$USER/.config/sway/config
 sudo -u "$USER" ln -sf $PWD/config/waybar/config /home/$USER/.config/waybar/config
 sudo -u "$USER" ln -sf $PWD/config/kitty /home/$USER/.config/kitty
+sudo -u "$USER" ln -sf "$PWD/config/mango/config.conf" "/home/$USER/.config/mango/config.conf"
+sudo -u "$USER" ln -sf "$PWD/config/noctalia/" "/home/$USER/.config/noctalia"
 
 echo "... done."
 
@@ -106,7 +116,7 @@ systemctl start docker  # start it now
 
 # Add current user to "docker" group so we don't need `sudo` to use it
 groupadd docker
-gpasswd -a ${USER} docker
+gpasswd -a "${USER}" docker
 # newgrp docker  # to log-in if required
 
 echo "... done."
@@ -123,5 +133,4 @@ echo "==========================================================================
 echo "Installing yazi file manager"
 dnf copr enable lihaohong/yazi
 dnf install yazi
-
 echo "... done."
