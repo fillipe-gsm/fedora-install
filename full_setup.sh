@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-# IT should be run with `sudo`, but some commands will not require such permissions and will be dropped
+# It should be run with `sudo`, but some commands will not require such permissions and will be dropped
 
 echo "=========================================================================="
 echo "Updating system packages..."
@@ -43,11 +43,8 @@ dnf -y install lazygit
 echo "... done."
 
 echo "- Pipx packages..."
-# sudo -u $USER pipx install "poetry"
-sudo -u "$USER" pipx install ranger-fm
 sudo -u "$USER" pipx install uv
 sudo -u "$USER" pipx install ruff # althought I can install it in my nvim with ruff as well
-# sudo -u $USER pipx install pylint
 echo "... done."
 
 echo "- Gem (ruby) packages..."
@@ -76,7 +73,6 @@ if [ -d "$nvim_path" ]; then
 else
     # Make sure to have SSH keys set up for git access
     sudo -u "$USER" git clone "git@github.com:fillipe-gsm/fedora-install.git" "$nvim_path"
-    # sudo -u $USER git clone "https://github.com/fillipe-gsm/kickstart.nvim.git" "$nvim_path"
     echo "...open neovim and see everything being installed."
 fi
 
@@ -91,9 +87,6 @@ dnf -y swap ffmpeg-free ffmpeg --allowerasing
 # Install additional codecs
 # Fedora 42
 dnf update -y @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
-# ## Instructions for Fedora 41
-# dnf -y groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
-# dnf -y groupupdate sound-and-video
 
 echo "... done."
 
