@@ -35,8 +35,9 @@ echo "- Latex (installing medium set of packages)..."
 dnf -y install texlive-scheme-medium texlive-powerdot texlive-luapstricks
 echo "... done."
 
+# `iptables-legacy` is required for docker to work in Fedora 42+
 echo "- Programming..."
-dnf -y install httpie docker docker-compose R-devel python3-devel
+dnf -y install httpie docker docker-compose R-devel python3-devel iptables-legacy
 dnf copr enable atim/lazygit -y
 dnf -y install lazygit
 echo "... done."
