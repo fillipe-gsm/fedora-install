@@ -61,19 +61,6 @@ dnf install noctalia-shell
 echo "... done."
 
 echo "=========================================================================="
-echo "Copying .config files (with symbolic links)"
-sudo -u "$USER" mkdir -p /home/$USER/.config/sway
-sudo -u "$USER" cp -r $PWD/config/sway/wallpapers /home/$USER/.config/sway/wallpapers
-sudo -u "$USER" mkdir -p /home/$USER/.config/waybar
-sudo -u "$USER" ln -sf $PWD/config/sway/config /home/$USER/.config/sway/config
-sudo -u "$USER" ln -sf $PWD/config/waybar/config /home/$USER/.config/waybar/config
-sudo -u "$USER" ln -sf $PWD/config/kitty /home/$USER/.config/kitty
-sudo -u "$USER" ln -sf "$PWD/config/mango/config.conf" "/home/$USER/.config/mango/config.conf"
-sudo -u "$USER" ln -sf "$PWD/config/noctalia/" "/home/$USER/.config/noctalia"
-
-echo "... done."
-
-echo "=========================================================================="
 echo "Preparing for neovim..."
 
 nvim_path="/home/$USER/.config/nvim"
@@ -133,4 +120,19 @@ echo "==========================================================================
 echo "Installing yazi file manager"
 dnf copr enable lihaohong/yazi
 dnf install yazi
+echo "... done."
+
+echo "=========================================================================="
+echo "Copying .config files (with symbolic links)"
+sudo -u "$USER" mkdir -p /home/$USER/.config/sway
+sudo -u "$USER" cp -r $PWD/config/sway/wallpapers /home/$USER/.config/sway/wallpapers
+sudo -u "$USER" mkdir -p /home/$USER/.config/waybar
+sudo -u "$USER" ln -sf $PWD/config/sway/config /home/$USER/.config/sway/config
+sudo -u "$USER" ln -sf $PWD/config/waybar/config /home/$USER/.config/waybar/config
+sudo -u "$USER" ln -sf $PWD/config/kitty /home/$USER/.config/kitty
+sudo -u "$USER" mkdir -p /home/$USER/.config/yazi
+sudo -u "$USER" ln -sf "$PWD/config/yazi/yazi.toml" "/home/$USER/.config/yazi/yazi.toml"
+sudo -u "$USER" ln -sf "$PWD/config/mango/config.conf" "/home/$USER/.config/mango/config.conf"
+sudo -u "$USER" ln -sf "$PWD/config/noctalia/" "/home/$USER/.config/noctalia"
+
 echo "... done."
