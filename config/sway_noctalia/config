@@ -1,0 +1,306 @@
+# Sway config for use with Noctalia v5 shell
+# Based on Fedoora default sway config + Noctalia integration from
+# config/mango/config.conf (mango WM)
+#
+# Read `man 5 sway` for a complete reference.
+
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+# Your preferred terminal emulator
+set $term kitty
+
+### Output configuration
+#
+# Wallpaper is handled by Noctalia v5 (see config/noctalia/settings.json -> wallpaper.*).
+# Sway's `output * bg` spawns swaybg, which conflicts with Noctalia's own wallpaper
+# layer (transition, random 300s, fillMode crop, etc.). If both are enabled you get
+# a flash of 94.jpg then Noctalia's 159.jpg and two competing background layers.
+#
+# Recommendation: keep this line DISABLED and let Noctalia manage wallpaper
+# (currently enabled=true, directory=~/filen_desktop_sync/Pictures/Wallpapers).
+# If you ever disable Noctalia wallpaper, uncomment the fallback line below.
+#
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+# Requires: desktop-backgrounds-compat, swaybg
+# output * bg /usr/share/backgrounds/default.png fill
+# output * bg $HOME/.config/sway/wallpapers/94.jpg fill
+# Fallback solid color matching Noctalia's solidColor #1a1a2e if Noctalia is off:
+# Disabled to let Noctalia manage wallpaper (see config/noctalia/settings.json -> wallpaper.*)
+# output * bg #1a1a2e solid_color
+#
+# Example configuration:
+#
+#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+#
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+### Input configuration
+#
+input "1739:52545:SYNA7DB5:01_06CB:CD41_Touchpad" {
+    dwt enabled
+    tap enabled
+    natural_scroll disabled
+    middle_emulation enabled
+}
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+# Keyboard layouts. It is possible to toggle between them with $mod+space
+input type:keyboard {
+    xkb_layout "br,us"
+    xkb_variant ",intl"
+    xkb_options "grp:win_space_toggle"
+    repeat_delay 250
+    repeat_rate 25
+}
+
+### Key bindings
+#
+# Basics:
+#
+    # Start a terminal
+    bindsym $mod+Return exec $term
+
+    # Kill focused window
+    bindsym $mod+Shift+q kill
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    bindsym $mod+Shift+c reload
+
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+#
+# Moving around:
+#
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+    # Or use $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+    # Ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+#
+# Workspaces:
+#
+    # Switch to workspace
+    bindsym $mod+1 workspace number 1
+    bindsym $mod+2 workspace number 2
+    bindsym $mod+3 workspace number 3
+    bindsym $mod+4 workspace number 4
+    bindsym $mod+5 workspace number 5
+    bindsym $mod+6 workspace number 6
+    bindsym $mod+7 workspace number 7
+    bindsym $mod+8 workspace number 8
+    bindsym $mod+9 workspace number 9
+    bindsym $mod+0 workspace number 10
+    # Move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace number 1
+    bindsym $mod+Shift+2 move container to workspace number 2
+    bindsym $mod+Shift+3 move container to workspace number 3
+    bindsym $mod+Shift+4 move container to workspace number 4
+    bindsym $mod+Shift+5 move container to workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6
+    bindsym $mod+Shift+7 move container to workspace number 7
+    bindsym $mod+Shift+8 move container to workspace number 8
+    bindsym $mod+Shift+9 move container to workspace number 9
+    bindsym $mod+Shift+0 move container to workspace number 10
+    # Note: workspaces can have any name you want, not just numbers.
+    # We just use 1-10 as the default.
+
+    # Toggle current and previous workspace
+    bindsym $mod+b workspace back_and_forth
+    bindsym $mod+Shift+b move container to workspace back_and_forth
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    # bindsym $mod+b splith
+    bindsym $mod+n splith
+    bindsym $mod+v splitv
+
+    # Switch the current container between different layout styles
+    # NOTE: $mod+s is layout stacking by default, but mango's Noctalia
+    # config uses $mod+s for control-center. To avoid conflict we map
+    # control-center to $mod+Shift+s below and keep $mod+s for stacking.
+    # If you prefer mango-like behavior, comment the next line and
+    # uncomment the control-center line in the Noctalia section.
+    bindsym $mod+s layout stacking
+    bindsym $mod+w layout tabbed
+    bindsym $mod+e layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
+
+    # Move focus to the parent container
+    bindsym $mod+a focus parent
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+#
+# Resizing containers:
+#
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Screenshot - use Noctalia + swappy fallback
+# Noctalia provides polished OSD and history; keep grim+swappy as fallback
+bindsym $mod+p exec noctalia msg screenshot-region
+# Alternative: direct grim/slurp if Noctalia is not running:
+# bindsym $mod+Shift+p exec grim -g "$(slurp)" - | swappy -f -
+bindsym Print exec noctalia msg screenshot-fullscreen
+bindsym Alt+Print exec noctalia msg screenshot-region
+
+gaps inner 10
+gaps outer 5
+
+### Idle / lock
+# Noctalia v5 handles idle, lock, and DPMS via its own settings (see
+# config/noctalia/settings.json -> idle.*). Disable the default swayidle
+# exec to avoid double-lock / race conditions. If you don't use Noctalia's
+# idle, uncomment the swayidle line below.
+#
+# exec swayidle -w \
+#     timeout 1000 'swaylock -f -c 000000' \
+#     timeout 900 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+#     before-sleep 'swaylock -f -c 000000'
+#
+# For system-level idle (Fedora's 90-swayidle.conf) to be disabled, an empty
+# override file is provided at config/sway_noctalia/config.d/90-swayidle.conf
+# (symlink/copy to ~/.config/sway/config.d/90-swayidle.conf).
+
+# Autostart applications
+## Day/night gamma adjustments - keep alongside Noctalia's nightLight if needed
+# exec gammastep -l -19.85944:-43.94346  # may not work for some drivers
+exec wlsunset -l -19.85944:-43.94346
+
+## Noctalia shell - replaces waybar, rofi, swaync/dunst, etc.
+exec noctalia
+
+## Other autostarts
+exec mullvad
+
+# Include system configs - must come BEFORE Noctalia overrides so our
+# bindsyms win. The layered-include expands to:
+# /usr/share/sway/config.d/*.conf, /etc/sway/config.d/*.conf,
+# $XDG_CONFIG_HOME/sway/config.d/*.conf
+#
+# To disable the default bar (waybar) completely, provide an empty
+# $XDG_CONFIG_HOME/sway/config.d/90-bar.conf (see config/sway_noctalia/config.d/90-bar.conf).
+# Similarly for idle/vol/brightness/media bindings overridden below.
+#
+include '$(/usr/libexec/sway/layered-include "/usr/share/sway/config.d/*.conf" "/etc/sway/config.d/*.conf" "${XDG_CONFIG_HOME:-$HOME/.config}/sway/config.d/*.conf")'
+
+### Noctalia v5 shell integration (mirrors config/mango/config.conf)
+# These are placed AFTER the include so they override Fedora's default
+# 60-bindings-volume.conf / 60-bindings-brightness.conf / 60-bindings-media.conf
+#
+# Launcher & panels (mango: SUPER+d -> launcher, SUPER+s -> control-center, SUPER+comma -> settings)
+bindsym $mod+d exec noctalia msg panel-toggle launcher
+# Mango uses $mod+s for control-center which collides with layout stacking.
+# We map control-center to $mod+Shift+s by default; uncomment next line for mango-like Super+s:
+# bindsym $mod+s exec noctalia msg panel-toggle control-center
+bindsym $mod+Shift+s exec noctalia msg panel-toggle control-center
+bindsym $mod+comma exec noctalia msg settings-toggle
+# Extra useful panel shortcuts
+bindsym $mod+Shift+n exec noctalia msg panel-toggle notification-center
+bindsym $mod+c exec noctalia msg panel-toggle control-center
+
+# Volume / mic / brightness via Noctalia OSD (replaces pactl/brightnessctl + notify-send)
+# --locked allows them to work even when screen is locked
+bindsym --locked XF86AudioRaiseVolume exec noctalia msg volume-up
+bindsym --locked XF86AudioLowerVolume exec noctalia msg volume-down
+bindsym --locked XF86AudioMute exec noctalia msg volume-mute
+bindsym --locked XF86AudioMicMute exec noctalia msg mic-mute
+# Optional fine-grained volume steps (same as mango but sway syntax):
+# bindsym --locked Shift+XF86AudioRaiseVolume exec noctalia msg volume-up 1
+# bindsym --locked Shift+XF86AudioLowerVolume exec noctalia msg volume-down 1
+
+bindsym --locked XF86MonBrightnessUp exec noctalia msg brightness-up
+bindsym --locked XF86MonBrightnessDown exec noctalia msg brightness-down
+# Keyboard backlight (if device has it)
+bindsym --locked XF86KbdBrightnessUp exec noctalia msg keyboard-backlight-up
+bindsym --locked XF86KbdBrightnessDown exec noctalia msg keyboard-backlight-down
+
+# Media controls via Noctalia (replaces playerctl bindings from 60-bindings-media.conf)
+bindsym --locked XF86AudioPlay exec noctalia msg media toggle
+bindsym --locked XF86AudioPause exec noctalia msg media pause
+bindsym --locked XF86AudioStop exec noctalia msg media stop
+bindsym --locked XF86AudioNext exec noctalia msg media next
+bindsym --locked XF86AudioPrev exec noctalia msg media previous
+# Seek 10s like mango's playerctl position +/-10 (Noctalia has no seek, fallback to playerctl):
+# bindsym XF86AudioForward exec playerctl position +10
+# bindsym XF86AudioRewind exec playerctl position -10
+
+# Session / power (Noctalia handles lock + DPMS)
+bindsym $mod+Shift+x exec noctalia msg session lock
+# bindsym $mod+Shift+q exec noctalia msg session logout
+# bindsym $mod+Shift+r exec noctalia msg session reboot
+# bindsym $mod+Shift+p exec noctalia msg session shutdown
+
+# Bar visibility toggles (optional)
+# bindsym $mod+Shift+b exec noctalia msg bar-toggle
