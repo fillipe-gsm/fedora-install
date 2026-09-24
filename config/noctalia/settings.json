@@ -451,12 +451,12 @@
         "lockCommand": "",
         "lockTimeout": 660,
         "resumeLockCommand": "",
-        "resumeScreenOffCommand": "",
+        "resumeScreenOffCommand": "$HOME/.config/noctalia/screen-on.sh",
         "resumeSuspendCommand": "",
-        "screenOffCommand": "",
+        "screenOffCommand": "$HOME/.config/noctalia/screen-off.sh",
         "screenOffTimeout": 600,
         "suspendCommand": "",
-        "suspendTimeout": 1800
+        "suspendTimeout": 0
     },
     "location": {
         "analogClockInCalendar": false,
