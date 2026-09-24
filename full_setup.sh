@@ -61,19 +61,6 @@ dnf install noctalia-shell
 echo "... done."
 
 echo "=========================================================================="
-echo "Copying .config files (with symbolic links)"
-sudo -u "$USER" mkdir -p /home/$USER/.config/sway
-sudo -u "$USER" cp -r $PWD/config/sway/wallpapers /home/$USER/.config/sway/wallpapers
-sudo -u "$USER" mkdir -p /home/$USER/.config/waybar
-sudo -u "$USER" ln -sf $PWD/config/sway/config /home/$USER/.config/sway/config
-sudo -u "$USER" ln -sf $PWD/config/waybar/config /home/$USER/.config/waybar/config
-sudo -u "$USER" ln -sf $PWD/config/kitty /home/$USER/.config/kitty
-sudo -u "$USER" ln -sf "$PWD/config/mango/config.conf" "/home/$USER/.config/mango/config.conf"
-sudo -u "$USER" ln -sf "$PWD/config/noctalia/" "/home/$USER/.config/noctalia"
-
-echo "... done."
-
-echo "=========================================================================="
 echo "Preparing for neovim..."
 
 nvim_path="/home/$USER/.config/nvim"
@@ -133,4 +120,26 @@ echo "==========================================================================
 echo "Installing yazi file manager"
 dnf copr enable lihaohong/yazi
 dnf install yazi
+echo "... done."
+
+echo "=========================================================================="
+echo "Copying .config files (with symbolic links)"
+sudo -u "$USER" mkdir -p /home/$USER/.config/sway
+sudo -u "$USER" cp -r $PWD/config/sway/wallpapers /home/$USER/.config/sway/wallpapers
+sudo -u "$USER" mkdir -p /home/$USER/.config/sway/config.d
+# Sway Noctalia v5 config is the default (replaces waybar/rofi/swaybar with Noctalia shell)
+sudo -u "$USER" ln -sf $PWD/config/sway_noctalia/config /home/$USER/.config/sway/config
+# Disable Fedora default bar/idle/volume/brightness/media/screenshot bindings (replaced by Noctalia)
+for f in 90-bar.conf 90-swayidle.conf 60-bindings-volume.conf 60-bindings-brightness.conf 60-bindings-media.conf 60-bindings-screenshot.conf; do
+  sudo -u "$USER" ln -sf $PWD/config/sway_noctalia/config.d/$f /home/$USER/.config/sway/config.d/$f
+done
+# Waybar config kept for fallback but not used (Noctalia bar is default)
+sudo -u "$USER" mkdir -p /home/$USER/.config/waybar
+sudo -u "$USER" ln -sf $PWD/config/waybar/config /home/$USER/.config/waybar/config
+sudo -u "$USER" ln -sf $PWD/config/kitty /home/$USER/.config/kitty
+sudo -u "$USER" mkdir -p /home/$USER/.config/yazi
+sudo -u "$USER" ln -sf "$PWD/config/yazi/yazi.toml" "/home/$USER/.config/yazi/yazi.toml"
+sudo -u "$USER" ln -sf "$PWD/config/mango/config.conf" "/home/$USER/.config/mango/config.conf"
+sudo -u "$USER" ln -sf "$PWD/config/noctalia/" "/home/$USER/.config/noctalia"
+
 echo "... done."

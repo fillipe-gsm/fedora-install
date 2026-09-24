@@ -1,0 +1,38 @@
+[opener]
+imv = [
+    { run = 'imv %s', orphan = true, desc = "Open with imv" }
+]
+
+mpv = [
+    { run = 'mpv %s', orphan = true, desc = "Open with mpv" }
+]
+
+mupdf = [
+    { run = 'mupdf %s', orphan = true, desc = "Open with mupdf" }
+]
+
+okular = [
+    { run = 'okular %s', orphan = true, desc = "Open with okular" }
+]
+
+kickstart = [
+    { run = 'env NVIM_APPNAME=nvim-kickstart nvim %s', block = true, desc = "Open with kickstart" }
+]
+
+# Fallback opener - required when you use `rules =` (which overwrites defaults)
+open = [
+    { run = 'xdg-open %s1', desc = "Open", for = "linux" },
+    { run = 'open %s', desc = "Open", for = "macos" },
+]
+
+[open]
+rules = [
+    { mime = "image/*", use = "imv" },
+    { mime = "video/*", use = "mpv" },
+    { mime = "text/*", use = "kickstart" },
+    { mime = "application/pdf", use = "mupdf" },
+    { mime = "application/epub+zip", use = "mupdf" },
+    { mime = "image/vnd.djvu", use = "okular" },
+    # Fallback for everything else (including PDFs if mupdf fails, uses system default like Evince)
+    { url = "*", use = "open" },
+]
