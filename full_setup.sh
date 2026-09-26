@@ -111,8 +111,8 @@ echo "... done."
 echo "=========================================================================="
 echo "Configuring git"
 
-sudo -u $USER git config --global user.email "fillipe.gsm@tutanota.com"
-sudo -u $USER git config --global user.name "Fillipe Goulart"
+sudo -u "$USER" git config --global user.email "fillipe.gsm@tutanota.com"
+sudo -u "$USER" git config --global user.name "Fillipe Goulart"
 
 echo "... done."
 
@@ -134,10 +134,10 @@ for f in 90-bar.conf 90-swayidle.conf 60-bindings-volume.conf 60-bindings-bright
   sudo -u "$USER" ln -sf $PWD/config/sway_noctalia/config.d/$f /home/$USER/.config/sway/config.d/$f
 done
 # Waybar config kept for fallback but not used (Noctalia bar is default)
-sudo -u "$USER" mkdir -p /home/$USER/.config/waybar
-sudo -u "$USER" ln -sf $PWD/config/waybar/config /home/$USER/.config/waybar/config
-sudo -u "$USER" ln -sf $PWD/config/kitty /home/$USER/.config/kitty
-sudo -u "$USER" mkdir -p /home/$USER/.config/yazi
+sudo -u "$USER" mkdir -p "/home/$USER/.config/waybar"
+sudo -u "$USER" ln -sf "$PWD/config/waybar/config" "/home/$USER/.config/waybar/config"
+sudo -u "$USER" ln -sf "$PWD/config/kitty" "/home/$USER/.config/kitty"
+sudo -u "$USER" mkdir -p "/home/$USER/.config/yazi"
 sudo -u "$USER" ln -sf "$PWD/config/yazi/yazi.toml" "/home/$USER/.config/yazi/yazi.toml"
 sudo -u "$USER" ln -sf "$PWD/config/mango/config.conf" "/home/$USER/.config/mango/config.conf"
 sudo -u "$USER" ln -sf "$PWD/config/noctalia/" "/home/$USER/.config/noctalia"
