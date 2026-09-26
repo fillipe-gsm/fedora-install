@@ -142,4 +142,8 @@ sudo -u "$USER" ln -sf "$PWD/config/yazi/yazi.toml" "/home/$USER/.config/yazi/ya
 sudo -u "$USER" ln -sf "$PWD/config/mango/config.conf" "/home/$USER/.config/mango/config.conf"
 sudo -u "$USER" ln -sf "$PWD/config/noctalia/" "/home/$USER/.config/noctalia"
 
+# Agent of empires (Agent orchestration)
+sudo -u "$USER" mkdir -p "/home/$USER/.config/agent-of-empires"
+sudo -u "$USER" ln -sf "$PWD/config/agent-of-empires/config.toml" "/home/$USER/.config/agent-of-empires/config.toml"
+
 echo "... done."
