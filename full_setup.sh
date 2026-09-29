@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-# IT should be run with `sudo`, but some commands will not require such permissions and will be dropped
+# It should be run with `sudo`, but some commands will not require such permissions and will be dropped
 
 echo "=========================================================================="
 echo "Updating system packages..."
@@ -12,6 +12,10 @@ echo "==========================================================================
 echo "Installing packages"
 echo "- Package managers..."
 dnf -y install pipx git
+echo "... done."
+
+echo "- Browsers..."
+dnf -y install qutebrowser
 echo "... done."
 
 echo "- Utilities..."
@@ -31,30 +35,43 @@ echo "- Latex (installing medium set of packages)..."
 dnf -y install texlive-scheme-medium texlive-powerdot texlive-luapstricks
 echo "... done."
 
+# `iptables-legacy` is required for docker to work in Fedora 42+
 echo "- Programming..."
-dnf -y install httpie docker docker-compose R-devel python3-devel sqlite3 libsqlite3x-devel
+dnf -y install httpie docker docker-compose R-devel python3-devel sqlite3 libsqlite3x-devel iptables-legacy
 dnf copr enable atim/lazygit -y
 dnf -y install lazygit
 echo "... done."
 
 echo "- Pipx packages..."
-# sudo -u $USER pipx install "poetry"
-sudo -u "$USER" pipx install ranger-fm
 sudo -u "$USER" pipx install uv
 sudo -u "$USER" pipx install ruff # althought I can install it in my nvim with ruff as well
-# sudo -u $USER pipx install pylint
+echo "... done."
+
+echo "- Gem (ruby) packages..."
+sudo -u "$USER" gem install asccidoctor
+sudo -u "$USER" gem install asccidoctor-pdf
+echo "... done."
+
+echo "- Extra desktop and window managers..."
+# MangoWM
+dnf install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
+dnf install mangowm
+# Noctalia desktop shell
+dnf install noctalia-shell
 echo "... done."
 
 echo "=========================================================================="
-echo "Copying .config files (with symbolic links)"
-sudo -u "$USER" mkdir -p /home/$USER/.config/sway
-sudo -u "$USER" cp -r $PWD/config/sway/wallpapers /home/$USER/.config/sway/wallpapers
-sudo -u "$USER" mkdir -p /home/$USER/.config/waybar
-sudo -u "$USER" ln -sf $PWD/config/sway/config /home/$USER/.config/sway/config
-sudo -u "$USER" ln -sf $PWD/config/waybar/config /home/$USER/.config/waybar/config
-sudo -u "$USER" ln -sf $PWD/config/kitty /home/$USER/.config/kitty
+echo "Preparing for neovim..."
 
-echo "... done."
+nvim_path="/home/$USER/.config/nvim"
+
+if [ -d "$nvim_path" ]; then
+    echo "...neovim config already exists. Skipping."
+else
+    # Make sure to have SSH keys set up for git access
+    sudo -u "$USER" git clone "git@github.com:fillipe-gsm/fedora-install.git" "$nvim_path"
+    echo "...open neovim and see everything being installed."
+fi
 
 echo "=========================================================================="
 echo "Adding multimedia support via RPM Fusion..."
@@ -67,9 +84,6 @@ dnf -y swap ffmpeg-free ffmpeg --allowerasing
 # Install additional codecs
 # Fedora 42
 dnf update -y @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
-# ## Instructions for Fedora 41
-# dnf -y groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
-# dnf -y groupupdate sound-and-video
 
 echo "... done."
 
@@ -89,7 +103,7 @@ systemctl start docker  # start it now
 
 # Add current user to "docker" group so we don't need `sudo` to use it
 groupadd docker
-gpasswd -a ${USER} docker
+gpasswd -a "${USER}" docker
 # newgrp docker  # to log-in if required
 
 echo "... done."
@@ -106,5 +120,26 @@ echo "==========================================================================
 echo "Installing yazi file manager"
 dnf copr enable lihaohong/yazi
 dnf install yazi
+echo "... done."
+
+echo "=========================================================================="
+echo "Copying .config files (with symbolic links)"
+sudo -u "$USER" mkdir -p /home/$USER/.config/sway
+sudo -u "$USER" cp -r $PWD/config/sway/wallpapers /home/$USER/.config/sway/wallpapers
+sudo -u "$USER" mkdir -p /home/$USER/.config/sway/config.d
+# Sway Noctalia v5 config is the default (replaces waybar/rofi/swaybar with Noctalia shell)
+sudo -u "$USER" ln -sf $PWD/config/sway_noctalia/config /home/$USER/.config/sway/config
+# Disable Fedora default bar/idle/volume/brightness/media/screenshot bindings (replaced by Noctalia)
+for f in 90-bar.conf 90-swayidle.conf 60-bindings-volume.conf 60-bindings-brightness.conf 60-bindings-media.conf 60-bindings-screenshot.conf; do
+    sudo -u "$USER" ln -sf $PWD/config/sway_noctalia/config.d/$f /home/$USER/.config/sway/config.d/$f
+done
+# Waybar config kept for fallback but not used (Noctalia bar is default)
+sudo -u "$USER" mkdir -p /home/$USER/.config/waybar
+sudo -u "$USER" ln -sf $PWD/config/waybar/config /home/$USER/.config/waybar/config
+sudo -u "$USER" ln -sf $PWD/config/kitty /home/$USER/.config/kitty
+sudo -u "$USER" mkdir -p /home/$USER/.config/yazi
+sudo -u "$USER" ln -sf "$PWD/config/yazi/yazi.toml" "/home/$USER/.config/yazi/yazi.toml"
+sudo -u "$USER" ln -sf "$PWD/config/mango/config.conf" "/home/$USER/.config/mango/config.conf"
+sudo -u "$USER" ln -sf "$PWD/config/noctalia/" "/home/$USER/.config/noctalia"
 
 echo "... done."
