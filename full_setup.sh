@@ -120,8 +120,8 @@ echo "... done."
 
 echo "=========================================================================="
 echo "Installing yazi file manager"
-dnf copr enable lihaohong/yazi
-dnf install yazi
+dnf copr enable lihaohong/yazi -y
+dnf install -y yazi
 echo "... done."
 
 echo "=========================================================================="
