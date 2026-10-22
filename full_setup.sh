@@ -47,17 +47,9 @@ sudo -u "$USER" pipx install uv
 sudo -u "$USER" pipx install ruff # althought I can install it in my nvim with ruff as well
 echo "... done."
 
-echo "- Gem (ruby) packages..."
-sudo -u "$USER" gem install asccidoctor
-sudo -u "$USER" gem install asccidoctor-pdf
-echo "... done."
-
 echo "- Extra desktop and window managers..."
-# MangoWM
-dnf install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
-dnf install mangowm
-# Noctalia desktop shell
-dnf install noctalia-shell
+# Noctalia desktop shell v5 (Fedora 44 only)
+dnf install noctalia
 echo "... done."
 
 echo "=========================================================================="
