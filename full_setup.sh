@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+REAL_USER="${SUDO_USER:-$USER}"
+REAL_HOME="$(getent passwd "$REAL_USER" | cut -d: -f6)"
+
 # It should be run with `sudo`, but some commands will not require such permissions and will be dropped
 
 echo "=========================================================================="
@@ -43,8 +46,8 @@ dnf -y install lazygit
 echo "... done."
 
 echo "- Pipx packages..."
-sudo -u "$USER" pipx install uv
-sudo -u "$USER" pipx install ruff # althought I can install it in my nvim with ruff as well
+sudo -H -u "$REAL_USER" pipx install uv
+sudo -H -u "$REAL_USER" pipx install ruff # althought I can install it in my nvim with ruff as well
 echo "... done."
 
 echo "- Extra desktop and window managers..."
@@ -62,13 +65,13 @@ curl -fsSL https://raw.githubusercontent.com/agent-of-empires/agent-of-empires/m
 echo "=========================================================================="
 echo "Preparing for neovim..."
 
-nvim_path="/home/$USER/.config/nvim"
+nvim_path="$REAL_HOME/.config/nvim"
 
 if [ -d "$nvim_path" ]; then
     echo "...neovim config already exists. Skipping."
 else
     # Make sure to have SSH keys set up for git access
-    sudo -u "$USER" git clone "git@github.com:fillipe-gsm/fedora-install.git" "$nvim_path"
+    sudo -H -u "$REAL_USER" git clone "git@github.com:fillipe-gsm/fedora-install.git" "$nvim_path"
     echo "...open neovim and see everything being installed."
 fi
 
@@ -102,7 +105,7 @@ systemctl start docker  # start it now
 
 # Add current user to "docker" group so we don't need `sudo` to use it
 groupadd docker
-gpasswd -a "${USER}" docker
+gpasswd -a "${REAL_USER}" docker
 # newgrp docker  # to log-in if required
 
 echo "... done."
@@ -110,8 +113,8 @@ echo "... done."
 echo "=========================================================================="
 echo "Configuring git"
 
-sudo -u "$USER" git config --global user.email "fillipe.gsm@tutanota.com"
-sudo -u "$USER" git config --global user.name "Fillipe Goulart"
+sudo -H -u "$REAL_USER" git config --global user.email "fillipe.gsm@tutanota.com"
+sudo -H -u "$REAL_USER" git config --global user.name "Fillipe Goulart"
 
 echo "... done."
 
@@ -123,26 +126,26 @@ echo "... done."
 
 echo "=========================================================================="
 echo "Copying .config files (with symbolic links)"
-sudo -u "$USER" mkdir -p /home/$USER/.config/sway
-sudo -u "$USER" cp -r $PWD/config/sway/wallpapers /home/$USER/.config/sway/wallpapers
-sudo -u "$USER" mkdir -p /home/$USER/.config/sway/config.d
+sudo -H -u "$REAL_USER" mkdir -p /home/$REAL_USER/.config/sway
+sudo -H -u "$REAL_USER" cp -r $PWD/config/sway/wallpapers /home/$REAL_USER/.config/sway/wallpapers
+sudo -H -u "$REAL_USER" mkdir -p /home/$REAL_USER/.config/sway/config.d
 # Sway Noctalia v5 config is the default (replaces waybar/rofi/swaybar with Noctalia shell)
-sudo -u "$USER" ln -sf $PWD/config/sway_noctalia/config /home/$USER/.config/sway/config
+sudo -H -u "$REAL_USER" ln -sf $PWD/config/sway_noctalia/config /home/$REAL_USER/.config/sway/config
 # Disable Fedora default bar/idle/volume/brightness/media/screenshot bindings (replaced by Noctalia)
 for f in 90-bar.conf 90-swayidle.conf 60-bindings-volume.conf 60-bindings-brightness.conf 60-bindings-media.conf 60-bindings-screenshot.conf; do
-  sudo -u "$USER" ln -sf $PWD/config/sway_noctalia/config.d/$f /home/$USER/.config/sway/config.d/$f
+  sudo -H -u "$REAL_USER" ln -sf $PWD/config/sway_noctalia/config.d/$f /home/$REAL_USER/.config/sway/config.d/$f
 done
 # Waybar config kept for fallback but not used (Noctalia bar is default)
-sudo -u "$USER" mkdir -p "/home/$USER/.config/waybar"
-sudo -u "$USER" ln -sf "$PWD/config/waybar/config" "/home/$USER/.config/waybar/config"
-sudo -u "$USER" ln -sf "$PWD/config/kitty" "/home/$USER/.config/kitty"
-sudo -u "$USER" mkdir -p "/home/$USER/.config/yazi"
-sudo -u "$USER" ln -sf "$PWD/config/yazi/yazi.toml" "/home/$USER/.config/yazi/yazi.toml"
-sudo -u "$USER" ln -sf "$PWD/config/mango/config.conf" "/home/$USER/.config/mango/config.conf"
-sudo -u "$USER" ln -sf "$PWD/config/noctalia/" "/home/$USER/.config/noctalia"
+sudo -H -u "$REAL_USER" mkdir -p "/home/$REAL_USER/.config/waybar"
+sudo -H -u "$REAL_USER" ln -sf "$PWD/config/waybar/config" "/home/$REAL_USER/.config/waybar/config"
+sudo -H -u "$REAL_USER" ln -sf "$PWD/config/kitty" "/home/$REAL_USER/.config/kitty"
+sudo -H -u "$REAL_USER" mkdir -p "/home/$REAL_USER/.config/yazi"
+sudo -H -u "$REAL_USER" ln -sf "$PWD/config/yazi/yazi.toml" "/home/$REAL_USER/.config/yazi/yazi.toml"
+sudo -H -u "$REAL_USER" ln -sf "$PWD/config/mango/config.conf" "/home/$REAL_USER/.config/mango/config.conf"
+sudo -H -u "$REAL_USER" ln -sf "$PWD/config/noctalia/" "/home/$REAL_USER/.config/noctalia"
 
 # Agent of empires (Agent orchestration)
-sudo -u "$USER" mkdir -p "/home/$USER/.config/agent-of-empires"
-sudo -u "$USER" ln -sf "$PWD/config/agent-of-empires/config.toml" "/home/$USER/.config/agent-of-empires/config.toml"
+sudo -H -u "$REAL_USER" mkdir -p "/home/$REAL_USER/.config/agent-of-empires"
+sudo -H -u "$REAL_USER" ln -sf "$PWD/config/agent-of-empires/config.toml" "/home/$REAL_USER/.config/agent-of-empires/config.toml"
 
 echo "... done."
