@@ -130,6 +130,7 @@ sudo -H -u "$REAL_USER" mkdir -p /home/$REAL_USER/.config/sway
 sudo -H -u "$REAL_USER" cp -r $PWD/config/sway/wallpapers /home/$REAL_USER/.config/sway/wallpapers
 sudo -H -u "$REAL_USER" mkdir -p /home/$REAL_USER/.config/sway/config.d
 # Sway Noctalia v5 config is the default (replaces waybar/rofi/swaybar with Noctalia shell)
+sudo -H -u "$REAL_USER" ln -sf "$PWD/config/noctalia/" "/home/$REAL_USER/.config/noctalia"
 sudo -H -u "$REAL_USER" ln -sf $PWD/config/sway_noctalia/config /home/$REAL_USER/.config/sway/config
 # Disable Fedora default bar/idle/volume/brightness/media/screenshot bindings (replaced by Noctalia)
 for f in 90-bar.conf 90-swayidle.conf 60-bindings-volume.conf 60-bindings-brightness.conf 60-bindings-media.conf 60-bindings-screenshot.conf; do
@@ -138,10 +139,18 @@ done
 # Waybar config kept for fallback but not used (Noctalia bar is default)
 sudo -H -u "$REAL_USER" mkdir -p "/home/$REAL_USER/.config/waybar"
 sudo -H -u "$REAL_USER" ln -sf "$PWD/config/waybar/config" "/home/$REAL_USER/.config/waybar/config"
-sudo -H -u "$REAL_USER" ln -sf "$PWD/config/kitty" "/home/$REAL_USER/.config/kitty"
+
+# Kitty configs as symlinks
+kitty_dest="/home/$REAL_USER/.config/kitty"
+[ -L "$kitty_dest" ] && rm -f "$kitty_dest"
+sudo -H -u "$REAL_USER" mkdir -p "$kitty_dest"
+for f in "$PWD"/config/kitty/*; do
+  sudo -H -u "$REAL_USER" ln -sfn "$f" "$kitty_dest/$(basename "$f")"
+done
+
+# Yazi
 sudo -H -u "$REAL_USER" mkdir -p "/home/$REAL_USER/.config/yazi"
 sudo -H -u "$REAL_USER" ln -sf "$PWD/config/yazi/yazi.toml" "/home/$REAL_USER/.config/yazi/yazi.toml"
-sudo -H -u "$REAL_USER" ln -sf "$PWD/config/noctalia/" "/home/$REAL_USER/.config/noctalia"
 
 # Agent of empires (Agent orchestration)
 sudo -H -u "$REAL_USER" mkdir -p "/home/$REAL_USER/.config/agent-of-empires"
