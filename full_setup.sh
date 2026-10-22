@@ -20,7 +20,7 @@ echo "... done."
 
 echo "- Utilities..."
 # tuxguitar is gone from Fedora 42 and I found no alternative solution
-dnf -y install fish kitty htop wlsunset flameshot zathura zathura-pdf-poppler pandoc thunderbird libreoffice ipe hledger keepassxc swappy
+dnf -y install fish kitty htop wlsunset flameshot zathura zathura-pdf-poppler pandoc thunderbird libreoffice ipe hledger keepassxc swappy tmux
 echo "... done."
 
 echo "- Virtualization..."
@@ -51,6 +51,13 @@ echo "- Extra desktop and window managers..."
 # Noctalia desktop shell v5 (Fedora 44 only)
 dnf install noctalia
 echo "... done."
+
+# Opencode
+curl -fsSL https://opencode.ai/v2/install | bash
+
+# Agent of empires
+curl -fsSL https://raw.githubusercontent.com/agent-of-empires/agent-of-empires/main/scripts/install.sh | bash
+
 
 echo "=========================================================================="
 echo "Preparing for neovim..."
