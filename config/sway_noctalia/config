@@ -41,6 +41,11 @@ set $term kitty
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
+# Display layout: laptop panel on the LEFT, external monitor on the RIGHT.
+# Both are 1920x1080, so the external starts at x=1920.
+output eDP-1 position 0,0
+output DP-4 position 1920,0
+
 ### Input configuration
 #
 input "1739:52545:SYNA7DB5:01_06CB:CD41_Touchpad" {
