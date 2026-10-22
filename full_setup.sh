@@ -104,7 +104,7 @@ systemctl enable docker # enable it on startup
 systemctl start docker  # start it now
 
 # Add current user to "docker" group so we don't need `sudo` to use it
-groupadd docker
+groupadd -f docker
 gpasswd -a "${REAL_USER}" docker
 # newgrp docker  # to log-in if required
 
