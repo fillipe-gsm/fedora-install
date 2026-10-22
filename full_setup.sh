@@ -156,4 +156,8 @@ sudo -H -u "$REAL_USER" ln -sf "$PWD/config/yazi/yazi.toml" "/home/$REAL_USER/.c
 sudo -H -u "$REAL_USER" mkdir -p "/home/$REAL_USER/.config/agent-of-empires"
 sudo -H -u "$REAL_USER" ln -sf "$PWD/config/agent-of-empires/config.toml" "/home/$REAL_USER/.config/agent-of-empires/config.toml"
 
+# Fish shell extras
+sudo -H -u "$REAL_USER" curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+fisher install Asim-Tahir/opencode.fish
+
 echo "... done."
