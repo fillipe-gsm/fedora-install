@@ -56,10 +56,10 @@ dnf install noctalia
 echo "... done."
 
 # Opencode
-curl -fsSL https://opencode.ai/v2/install | bash
+sudo -H -u "$REAL_USER" curl -fsSL https://opencode.ai/v2/install | bash
 
 # Agent of empires
-curl -fsSL https://raw.githubusercontent.com/agent-of-empires/agent-of-empires/main/scripts/install.sh | bash
+sudo -H -u "$REAL_USER" curl -fsSL https://raw.githubusercontent.com/agent-of-empires/agent-of-empires/main/scripts/install.sh | bash
 
 
 echo "=========================================================================="
