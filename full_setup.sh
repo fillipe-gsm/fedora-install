@@ -141,7 +141,6 @@ sudo -H -u "$REAL_USER" ln -sf "$PWD/config/waybar/config" "/home/$REAL_USER/.co
 sudo -H -u "$REAL_USER" ln -sf "$PWD/config/kitty" "/home/$REAL_USER/.config/kitty"
 sudo -H -u "$REAL_USER" mkdir -p "/home/$REAL_USER/.config/yazi"
 sudo -H -u "$REAL_USER" ln -sf "$PWD/config/yazi/yazi.toml" "/home/$REAL_USER/.config/yazi/yazi.toml"
-sudo -H -u "$REAL_USER" ln -sf "$PWD/config/mango/config.conf" "/home/$REAL_USER/.config/mango/config.conf"
 sudo -H -u "$REAL_USER" ln -sf "$PWD/config/noctalia/" "/home/$REAL_USER/.config/noctalia"
 
 # Agent of empires (Agent orchestration)
