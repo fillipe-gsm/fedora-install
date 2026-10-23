@@ -129,8 +129,9 @@ echo "Copying .config files (with symbolic links)"
 sudo -H -u "$REAL_USER" mkdir -p /home/$REAL_USER/.config/sway
 sudo -H -u "$REAL_USER" cp -r $PWD/config/sway/wallpapers /home/$REAL_USER/.config/sway/wallpapers
 sudo -H -u "$REAL_USER" mkdir -p /home/$REAL_USER/.config/sway/config.d
-# Sway Noctalia v5 config is the default (replaces waybar/rofi/swaybar with Noctalia shell)
-sudo -H -u "$REAL_USER" ln -sf "$PWD/config/noctalia/" "/home/$REAL_USER/.config/noctalia"
+# Noctalia v5 settings live in ~/.local/state/noctalia/settings.toml (tracked in git)
+sudo -H -u "$REAL_USER" mkdir -p /home/$REAL_USER/.local/state/noctalia
+sudo -H -u "$REAL_USER" ln -sfn "$PWD/config/noctalia/settings.toml" /home/$REAL_USER/.local/state/noctalia/settings.toml
 sudo -H -u "$REAL_USER" ln -sf $PWD/config/sway_noctalia/config /home/$REAL_USER/.config/sway/config
 # Disable Fedora default bar/idle/volume/brightness/media/screenshot bindings (replaced by Noctalia)
 for f in 90-bar.conf 90-swayidle.conf 60-bindings-volume.conf 60-bindings-brightness.conf 60-bindings-media.conf 60-bindings-screenshot.conf; do
