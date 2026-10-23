@@ -132,6 +132,9 @@ sudo -H -u "$REAL_USER" mkdir -p /home/$REAL_USER/.config/sway/config.d
 # Noctalia v5 settings live in ~/.local/state/noctalia/settings.toml (tracked in git)
 sudo -H -u "$REAL_USER" mkdir -p /home/$REAL_USER/.local/state/noctalia
 sudo -H -u "$REAL_USER" ln -sfn "$PWD/config/noctalia/settings.toml" /home/$REAL_USER/.local/state/noctalia/settings.toml
+# Umbriel compositor config
+sudo -H -u "$REAL_USER" mkdir -p /home/$REAL_USER/.config/umbriel
+sudo -H -u "$REAL_USER" ln -sfn "$PWD/config/umbriel/config.toml" /home/$REAL_USER/.config/umbriel/config.toml
 sudo -H -u "$REAL_USER" ln -sf $PWD/config/sway_noctalia/config /home/$REAL_USER/.config/sway/config
 # Disable Fedora default bar/idle/volume/brightness/media/screenshot bindings (replaced by Noctalia)
 for f in 90-bar.conf 90-swayidle.conf 60-bindings-volume.conf 60-bindings-brightness.conf 60-bindings-media.conf 60-bindings-screenshot.conf; do
