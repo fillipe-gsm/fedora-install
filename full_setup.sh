@@ -160,8 +160,18 @@ sudo -H -u "$REAL_USER" ln -sf "$PWD/config/yazi/yazi.toml" "/home/$REAL_USER/.c
 sudo -H -u "$REAL_USER" mkdir -p "/home/$REAL_USER/.config/agent-of-empires"
 sudo -H -u "$REAL_USER" ln -sf "$PWD/config/agent-of-empires/config.toml" "/home/$REAL_USER/.config/agent-of-empires/config.toml"
 
-# Fish shell extras
-sudo -H -u "$REAL_USER" curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
-fisher install Asim-Tahir/opencode.fish
+# Fish configs as symlinks
+fish_dest="/home/$REAL_USER/.config/fish"
+sudo -H -u "$REAL_USER" mkdir -p "$fish_dest"
+# Remove fisher/fish generated conf.d dir so it can be replaced by the symlink
+# (rm -rf on the symlink only removes the link, not the tracked target)
+sudo -H -u "$REAL_USER" rm -rf "$fish_dest/conf.d"
+for f in config.fish fish_plugins fish_variables conf.d; do
+  sudo -H -u "$REAL_USER" ln -sfn "$PWD/config/fish/$f" "$fish_dest/$f"
+done
+
+# Fish shell extras (must run inside fish, not bash)
+sudo -H -u "$REAL_USER" fish -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher'
+sudo -H -u "$REAL_USER" fish -c 'fisher install Asim-Tahir/opencode.fish'
 
 echo "... done."
