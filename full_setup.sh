@@ -40,7 +40,7 @@ echo "... done."
 
 # `iptables-legacy` is required for docker to work in Fedora 42+
 echo "- Programming..."
-dnf -y install httpie docker docker-compose R-devel python3-devel iptables-legacy luarocks libuv-devel libcurl-devel libxml2-devel libgit2-devel libssh2-devel
+dnf -y install httpie docker docker-compose R-devel python3-devel iptables-legacy luarocks libuv-devel libcurl-devel libxml2-devel libgit2-devel libssh2-devel fontconfig-devel freetype-devel harfbuzz-devel fribidi-devel libpng-devel libtiff-devel libjpeg-turbo-devel libwebp-devel
 dnf copr enable atim/lazygit -y
 dnf -y install lazygit
 echo "... done."
