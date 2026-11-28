@@ -113,8 +113,9 @@ echo "... done."
 echo "=========================================================================="
 echo "Configuring git"
 
-sudo -H -u "$REAL_USER" git config --global user.email "fillipe.gsm@tutanota.com"
-sudo -H -u "$REAL_USER" git config --global user.name "Fillipe Goulart"
+# User identity, delta pager and merge style live in the tracked config/git/.gitconfig,
+# which is symlinked to ~/.gitconfig in the "Copying .config files" section below.
+# Do not run `git config --global` here: it would write into the repository file.
 
 echo "... done."
 
@@ -159,6 +160,13 @@ sudo -H -u "$REAL_USER" ln -sf "$PWD/config/yazi/yazi.toml" "/home/$REAL_USER/.c
 # Agent of empires (Agent orchestration)
 sudo -H -u "$REAL_USER" mkdir -p "/home/$REAL_USER/.config/agent-of-empires"
 sudo -H -u "$REAL_USER" ln -sf "$PWD/config/agent-of-empires/config.toml" "/home/$REAL_USER/.config/agent-of-empires/config.toml"
+
+# Git (identity, delta pager, merge conflict style)
+sudo -H -u "$REAL_USER" ln -sf "$PWD/config/git/.gitconfig" "/home/$REAL_USER/.gitconfig"
+
+# Lazygit
+sudo -H -u "$REAL_USER" mkdir -p "/home/$REAL_USER/.config/lazygit"
+sudo -H -u "$REAL_USER" ln -sf "$PWD/config/lazygit/config.yml" "/home/$REAL_USER/.config/lazygit/config.yml"
 
 # Fish configs as symlinks
 fish_dest="/home/$REAL_USER/.config/fish"
